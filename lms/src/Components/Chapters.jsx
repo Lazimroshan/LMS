@@ -23,7 +23,7 @@ function Chapters() {
   }, []);
 
   return (
-    <div className="h-full bg-gray-900 bg-cover bg-center p-4 ">
+    <div className="min-h-screen bg-gray-900 bg-cover bg-center p-4 ">
       <h1 className="text-center text-white text-2xl font-bold pb-8">CHAPTERS</h1>
       {Chapters.map((chap) => (
         <div className="w-full bg-white p-4 mb-4 rounded-lg">
