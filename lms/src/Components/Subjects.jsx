@@ -23,10 +23,10 @@ function Subjects() {
         {Subjects.map((sub) => (
           <Link key={sub.id} to={`/chapters/${sub.id}`}>
             <div className="w-full flex items-center p-4 hover:opacity-50 transition-all duration-200 z-10 relative">
-              <div className="flex-shrink-0 w-10 h-10 bg-white rounded-full flex items-center justify-center mr-4 border-4 border-gray-800">
+              <div className="flex-shrink-0 w-12 h-12 bg-white rounded-full flex items-center justify-center mr-4 border-4 border-gray-800">
                 <span className="text-gray-900 font-bold">{sub.id}</span>
               </div>
-              <h2 className="text-xl font-bold text-white">{sub.title}</h2>
+              <h2 className="text-2xl font-bold text-white">{sub.title}</h2>
             </div>
           </Link>
         ))}
