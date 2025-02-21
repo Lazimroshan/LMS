@@ -1,53 +1,38 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import { Link } from 'react-router-dom'
-import image1 from '../assets/images/biology.jpg'
-import image2 from '../assets/images/physics.jpg'
-import image3 from '../assets/images/malayalam.jpg'
-import image4 from '../assets/images/mathematics.jpg'
-import image5 from '../assets/images/computer science.webp'
-import image6 from '../assets/images/chemistry.jpg'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Subjects() {
-    const images = {
-        'biology': image1,
-        'chemistry': image6,
-        'physics': image2,
-        'malayalam': image3,
-        'mathematics': image4,
-        'computer science': image5,
-    }
+  const [Subjects, setSubjects] = useState([]);
 
-    const [Subjects, setSubjects] = useState([])
+  useEffect(() => {
+    axios
+      .get(`https://trogon.info/interview/php/api/subjects.php`)
+      .then((response) => {
+        console.log(response.data);
+        setSubjects(response.data);
+      });
+  }, []);
 
-    useEffect(() => {
-        axios.get(`https://trogon.info/interview/php/api/subjects.php`).then((response) => {
-            console.log(response.data)
-            setSubjects(response.data)
-        })
-    }, [])
-
-    return (
-        <div className="h-full p-4 bg-gray-900">
-            <h1 className='text-3xl font-bold text-center text-white mb-4'>SUBJECTS</h1>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                {Subjects.map((sub) => (
-                    <div key={sub.id} className='flex flex-col items-center p-4 rounded-lg'>
-                        <Link to={`/chapters/${sub.id}`} className='flex flex-col items-center'>
-                            <div className='w-24 h-24 mb-2'>
-                                <img 
-                                    src={images[sub.title.toLowerCase()]} 
-                                    alt={sub.title} 
-                                    className='w-full h-full object-cover rounded-full' 
-                                />
-                            </div>
-                            <h1 className='text-xl font-bold text-center text-white'>{sub.title}</h1>
-                        </Link>
-                    </div>
-                ))}
+  return (
+    <div className="min-h-screen p-4 bg-gray-900">
+      <h1 className="text-3xl font-bold text-center text-white mb-8">
+        SUBJECTS
+      </h1>
+      <div className="">
+        {Subjects.map((sub) => (
+          <Link key={sub.id} to={`/chapters/${sub.id}`}>
+            <div className="w-full flex items-center p-4 hover:opacity-50 transition-all duration-200 z-10 relative">
+              <div className="flex-shrink-0 w-10 h-10 bg-white rounded-full flex items-center justify-center mr-4 border-4 border-gray-800">
+                <span className="text-gray-900 font-bold">{sub.id}</span>
+              </div>
+              <h2 className="text-xl font-bold text-white">{sub.title}</h2>
             </div>
-        </div>
-    )
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
 }
 
-export default Subjects
+export default Subjects;
